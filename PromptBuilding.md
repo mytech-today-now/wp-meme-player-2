@@ -81,17 +81,19 @@ Users should be able to create playlists of media and HTML content that can be v
   - **Admin UI Integration**: Integrate playlists into the WordPress admin UI, allowing users to manage playlists similarly to how they manage posts or pages.
   - **Sorting and Filtering**: Provide ways to sort and filter posts by post type so that playlists show up exclusively when needed.
 
-- **Preview GIF Generation**: Implement functionality to generate an optional preview video of the playlist in `.gif` format to represent the playlist in WordPress. This preview GIF can be used as a thumbnail or preview image for the playlist.
+- **Preview GIF Generation**: Implement functionality to automatically generate a preview GIF of the playlist in `.gif` format whenever a playlist (custom post) is saved or published. This preview GIF will represent the playlist in WordPress and can be used as a thumbnail or preview image and featured image.  This .gif will be saved into the media library and assigned to the Playlist (custom-post).
 
 - **Frame Timing Controls**:
   - **Default Image Timer**: Allow the creator to set a default time duration that determines how long each image frame is displayed during playback.
   - **Individual Frame Timing**: Enable each frame to have its own timing settings that can override the default playback time length.
     - **Hold Until Clicked**: Option for a frame to remain displayed until the user manually advances to the next frame.
     - **Loop Until Advanced**: Option for a frame to loop continuously until the next frame is manually advanced.
+    - **Prevent Skip**: Only Creators during editing are able to skip through these frames, otherwise the user must wait and watch this frame.
+
 
 - **Drag-and-Drop Playlist Editing**:
   - **Drag-and-Drop File Upload**: When creating a new playlist, users should have the ability to drag and drop files into a designated area, which adds each item to the new playlist in the order they were added.
-  - **Playlist Editor Page**: Provide a playlist editor page that uses drag-and-drop features, allowing creators to manage and rearrange the playlist items as necessary.
+  - **Playlist Editor Page**: Provide a playlist editor page that uses drag-and-drop features, allowing creators to manage and rearrange the playlist items as necessary.  The items in the playlist can be scaled larger or smaller via a slidebar that allows more items in the view window if the items are small, including the Playlist item number, preview, title, filename, hyperlink to filepath, 
   - **Reordering Items**: Allow creators to drag and drop playlist items to rearrange their order.
   - **Bulk File Addition**: Maintain file controls such as system dialogs to add multiple files at once to the playlist.
   - **Editing Controls**: Provide buttons and controls for changing the order of the playlist, deleting items, and adjusting settings for individual frames.
@@ -130,6 +132,40 @@ Users should be able to create playlists of media and HTML content that can be v
     - Ensure compliance with privacy regulations (e.g., GDPR, CCPA) by providing options for user consent and data anonymization.
     - Allow end-users to opt out of tracking.
 
+- **Enhanced Playlist Editor Layout**:
+  - **Vertical Carousel Layout**:
+    - Design the playlist editor with a vertical carousel that lists all frames in the playlist.
+    - Each frame in the carousel is represented by an icon based on its type:
+      - **Image**: Display the actual image thumbnail.
+      - **Audio**: Display an audio icon.
+      - **Video**: Display an MP4 preview frame.
+      - **HTML**: Display an HTML icon.
+      - **PDF**: Display an PDF icon.
+      - **Form**: Display a form icon.
+      - **JavaScript**: Display a JavaScript icon.
+  - **Preview Window**:
+    - As each frame is edited, it appears in a Preview window within the Playlist Editor Page.
+    - **Frame Details in Preview Window**:
+      - **Name**: Each frame can be named.
+      - **Meta Data and SEO Content**: Tag each frame with relevant metadata and SEO information.
+      - **Creation Time**: Display the timestamp indicating when the frame was added to the playlist.
+      - **Timer Settings**:
+        - **Default Timer**: Set to the playlist's default timer.
+        - **Custom Timer**: Allow users to adjust the time by milliseconds for precise timing.
+      - **Content Fields**:
+      - **Title**: Up to 60 characters (UTF-8 text only).
+      - **File**: Up to 255 characters (UTF-8 text only).
+        - **Content**: Content of the Frame displayed on an HTML Canvas.
+        - **Short Description**: Up to 160 characters (UTF-8 text only).
+        - **Long Description**: Up to 2400 characters (UTF-8 text only).
+      - **Exit URL**:
+        - Provide a field for an exit URL that, when clicked, opens the new URL in a new tab.
+      - **Comments**:
+        - **Frame Level Comments**: Allow internet comments to be added at the frame level.
+        - **Playlist Level Comments**: Allow internet comments to be added at the playlist level.
+        - **Creator Level Comments**: Allow internet comments to be added at the creator level.
+        - **Control Mechanism**: Handle comments through the standard WordPress comment system.
+
 You will create the following via code:
 
 1. **Database Model**
@@ -141,10 +177,11 @@ You will create the following via code:
      - Utilize custom taxonomies or post meta to associate media items with playlists, including the order or position of each item within the playlist.
    - **Frames**:
      - Store each frame's HTML content, individual timing settings, and associate it with the playlist post and its sequence order.
+     - Include metadata fields for frame name, SEO content, creation time, timer settings, titles, descriptions, exit URLs, and comments.
    - **User Analytics Settings**:
      - Store analytics provider credentials and tracking codes in user meta for per-user settings.
    - **Preview GIF Data**:
-     - Store metadata and file paths for the optional preview GIFs associated with each playlist.
+     - Automatically store metadata and file paths for the generated preview GIFs associated with each playlist upon saving or publishing.
 
 2. **User Interface (UI)**
 
@@ -162,9 +199,20 @@ You will create the following via code:
        - Provide options for each frame to set custom timing, hold until clicked, or loop until advanced.
      - **Editing Controls**:
        - Provide buttons and controls to change the order of the playlist, delete items, and adjust settings for individual frames.
-   - **Generate Preview GIF**:
-     - Provide an option within the playlist management UI for users to generate a preview GIF of their playlist.
-     - Allow users to select which frames or media items to include in the preview GIF.
+   - **Enhanced Playlist Editor Layout**:
+     - **Vertical Carousel**: Display all frames in a vertical carousel with appropriate icons representing each frame type.
+     - **Preview Window**:
+       - As frames are edited, display them in a Preview window.
+       - **Frame Details**:
+         - Allow naming of each frame.
+         - Tag frames with metadata and SEO content.
+         - Display creation time.
+         - Provide timer settings with millisecond precision.
+         - Include fields for title, short description, long description, and exit URL.
+         - Enable internet comments at frame, playlist, and creator levels using standard WordPress comment controls.
+   - **Preview GIF Generation**:
+     - Automatically generate a preview GIF of the playlist whenever it is saved or published.
+     - Ensure that the generated GIF includes all relevant frames or media items in the playlist.
    - **User Profile Analytics Settings**:
      - In the WordPress User profile page, add fields for users to input their analytics provider credentials and tracking codes.
    - **Playlist Viewing**:
@@ -203,8 +251,8 @@ You will create the following via code:
      - Implement backend logic to handle the default timing settings for playlists and custom timing settings for individual frames.
      - Handle logic for frames set to hold until clicked or loop until advanced.
    - **Preview GIF Generation**:
-     - Implement server-side functionality to generate GIF previews of playlists.
-     - Process selected frames or media items and compile them into a GIF file using Node.js and appropriate libraries.
+     - Implement server-side functionality to automatically generate GIF previews of playlists upon saving or publishing a playlist.
+     - Automatically process frames or media items and compile them into a GIF file using Node.js and appropriate libraries.
    - **Analytics Event Tracking**:
      - Implement code to send event data to the selected analytics providers.
      - Ensure that data is sent according to each provider's API requirements.
@@ -284,7 +332,7 @@ You will create the following via code:
     - **Instructive Comments**:
       - Include detailed comments in your code to explain functionality and facilitate future development.
     - **User Guide**:
-      - Create a user guide within the plugin's admin area to help users understand how to use all features, including generating and using preview GIFs, setting frame timing options, configuring analytics, and using drag-and-drop functionality.
+      - Create a user guide within the plugin's admin area to help users understand how to use all features, including automatic preview GIF generation, setting frame timing options, configuring analytics, using drag-and-drop functionality, and managing frame metadata and SEO content.
     - **Developer Documentation**:
       - Provide documentation for the Plugin API to assist developers in extending or integrating with the plugin.
 
@@ -297,7 +345,7 @@ You will create the following via code:
     - **Docker Environment**:
       - Use the provided Docker configuration to create a consistent development and testing environment.
     - **GIF Generation Testing**:
-      - Thoroughly test the preview GIF generation feature to ensure it works reliably with various media types and sizes.
+      - Thoroughly test the automatic preview GIF generation feature to ensure it works reliably with various media types and sizes.
     - **Timing Settings Testing**:
       - Test the default and custom frame timing settings extensively to ensure they behave as expected during playback.
     - **Drag-and-Drop Testing**:
@@ -305,6 +353,10 @@ You will create the following via code:
     - **Analytics Integration Testing**:
       - Test the analytics tracking to ensure event data is correctly sent to the selected analytics providers.
       - Verify that tracking codes are correctly applied at both user and playlist levels.
+    - **Enhanced Playlist Editor Testing**:
+      - Test the vertical carousel layout to ensure all frame types are correctly represented with appropriate icons.
+      - Verify that the Preview window accurately displays and allows editing of frame metadata, timing, descriptions, and exit URLs.
+      - Ensure comments can be added and managed at frame, playlist, and creator levels through the standard WordPress comment system.
 
 12. **Licensing and Compliance**
 
