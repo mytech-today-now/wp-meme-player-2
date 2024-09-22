@@ -153,8 +153,7 @@ Your response should be a meticulously refactored and highly verbose prompt that
                     - **Visibility Control:** Provide administrators with the ability to disable the Playlist Page through the plugin settings, offering control over content accessibility based on site needs.
 
                 - **Administrator Controls:**
-                    - **Settings Page Access:** Restrict access to the plugin settings page exclusively to Administrators and Editors, ensuring that only authorized users can modify featured rows configurations.
-
+                    - **Settings Page Access:** Restrict access to the plugin settings page exclusively to Administrators and Editors, ensuring that only authorized users can modify featured rows configurations and other sensitive settings.
     - **Security and Permissions:**
         - **Role-Based Access:** Implement role-based permissions to ensure that only authorized users can perform specific actions, such as adding playlists or modifying settings.
         - **Data Validation and Sanitization:** Ensure that all user inputs are validated and sanitized to prevent security vulnerabilities like SQL injection or cross-site scripting (XSS) attacks.
@@ -217,7 +216,7 @@ Your response should be a meticulously refactored and highly verbose prompt that
         - **Dynamic Grid Display:**
             - **Functionality:** Render a paginated Playlist Page featuring a dynamic, color-coded grid of playlist items. Implement responsive design to ensure compatibility across various devices and screen sizes.
             - **Sorting and Grouping:**
-                - **Options:** Allow users to sort and group playlists by Title (alphabetical), Publish Date (Date-Time), and Author/Creator (grouped by creator's works).
+                - **Options:** Allow users to sort and group playlists by Title (alphabetical), Color Code, Tags, Categories,Publish Date (Date-Time), Author/Creator (sub-sortable &grouped by creator's works) and Search.
                 - **Implementation:** Provide dropdowns or interactive UI elements for users to select their preferred sorting and grouping criteria.
             - **Color Coding:**
                 - **Functionality:** Assign color codes to playlist items based on specific criteria (e.g., category, popularity) to enhance visual organization and user navigation.
@@ -268,6 +267,10 @@ Your response should be a meticulously refactored and highly verbose prompt that
             - **Title of the Playlist:** Displayed prominently to identify the playlist.
             - **Publish Date:** Indicates when the playlist was created or last updated.
             - **Preview GIF:** Provides a visual snapshot of the playlist's content, enhancing user engagement.
+            - **Color Code:** Indicates the color of the playlist.
+            - **Author/Creator:** Indicates the creator of the playlist.
+            - **Short Description:** A short description of the playlist.
+            - **Tags:** Tags associated with the playlist.
             - **Play Button:** An interactive element that redirects the user to the Playlist in the appropriate layout, opening in a new tab to maintain the user's current browsing context.
 
         - **Interactivity:**
