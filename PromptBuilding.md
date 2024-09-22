@@ -1,6 +1,6 @@
 **Objective:**
 
-You are entrusted with the intricate task of developing a robust and feature-rich WordPress plugin named **“Dynamic Playlist Manager”** within a Dockerized environment. This plugin is designed to empower content creators by allowing them to add, manage, and display custom playlists on a dedicated Playlist Page. The Playlist Page will feature a dynamic, color-coded grid of Playlist items, offering extensive sorting, grouping, and customization options to enhance user engagement and content discoverability. To ensure the plugin's maintainability, scalability, and adherence to best practices, you will incorporate established programming design patterns and strictly follow WordPress coding standards.
+You are assigned the comprehensive responsibility of developing a sophisticated and feature-rich WordPress plugin named **“Dynamic Playlist Manager”** within a Dockerized environment. This plugin aims to empower content creators by enabling them to add, manage, and display custom playlists on a dedicated Playlist Page. The Playlist Page will showcase a dynamic, color-coded grid of playlist items, providing extensive options for sorting, grouping, and customization to enhance user engagement and content discoverability. To ensure the plugin's maintainability, scalability, and adherence to best practices, you will incorporate established programming design patterns and strictly follow WordPress coding standards.
 
 Your response should be a meticulously refactored and highly verbose prompt that delves deeply into each component of the plugin, providing thorough explanations to ensure absolute clarity. This prompt is intended to serve as the foundational blueprint for a series of subsequent development activities. Therefore, it is imperative that every detail is elaborated upon with precision to facilitate seamless future enhancements and integrations.
 
@@ -12,16 +12,20 @@ Your response should be a meticulously refactored and highly verbose prompt that
     - **Singleton Pattern:**
         - **Purpose:** Ensure that specific classes within the plugin are instantiated only once throughout the application's lifecycle.
         - **Application:** Utilize this pattern for managing shared resources or configurations, such as the main plugin class or configuration settings, to prevent redundant instances and maintain consistency.
+
     - **Model-View-Controller (MVC) Architecture:**
         - **Model:** Handles all data-related operations, including interactions with the database and WordPress APIs.
         - **View:** Manages the presentation layer, rendering the user interface within both the WordPress admin dashboard and the front-end Playlist Page.
         - **Controller:** Manages the flow of the application by handling user input, processing requests, and coordinating interactions between the Model and View components.
+
     - **Observer Pattern:**
         - **Purpose:** Enable different parts of the plugin to respond dynamically to events or changes, enhancing modularity.
         - **Application:** Align with WordPress's hook system to allow the plugin to listen for and respond to specific actions or filters, facilitating event-driven interactions.
+
     - **Decorator Pattern:**
         - **Purpose:** Allow the dynamic addition of responsibilities to objects without altering their existing structure.
         - **Application:** Extend or customize existing WordPress classes within the plugin, providing additional functionalities such as enhanced media handling or custom admin interfaces.
+
     - **Dependency Injection:**
         - **Purpose:** Promote loose coupling by injecting dependencies into classes rather than hardcoding them.
         - **Application:** Enhance flexibility and testability by allowing easy swapping of components, such as database handlers or API clients, thus facilitating maintenance and scalability.
@@ -35,18 +39,23 @@ Your response should be a meticulously refactored and highly verbose prompt that
     - **Dockerfile:**
         - **Purpose:** Define the Docker image configuration.
         - **Content:** Specify the necessary environment for the plugin, including the appropriate versions of PHP, Node.js, and required extensions. Ensure compatibility with WordPress requirements and optimize for performance.
+
     - **docker-compose.yaml:**
         - **Purpose:** Orchestrate multi-container Docker applications.
         - **Content:** Include configurations for WordPress, MySQL, Node.js, and other dependencies, ensuring seamless integration and communication between services. Define service dependencies, networking, and volume mounts for persistent data storage.
+
     - **.env File:**
         - **Purpose:** Securely manage environment variables.
         - **Content:** Store sensitive information such as database credentials, API keys, and secret tokens, ensuring they are not exposed within the codebase. Implement best practices for environment variable management to enhance security.
+
     - **Web Server Configuration:**
         - **Options:** Configure Nginx or Apache within the Docker container.
         - **Focus:** Optimize settings for performance and security, including setting appropriate headers, enabling SSL/TLS, and configuring caching mechanisms to ensure efficient and secure operation of the plugin.
+
     - **PHP and Node.js Configuration:**
         - **Purpose:** Ensure the Docker instance includes the correct versions of PHP and Node.js.
         - **Content:** Include necessary extensions and packages required by the plugin to function correctly, such as PHP extensions for image processing or Node.js packages for build tools and asset management.
+
     - **Database Initialization:**
         - **Method:** Use `init.sql` scripts.
         - **Purpose:** Set up the MySQL database schema required by WordPress and the plugin, ensuring the correct structure and initial data are in place. Include necessary tables, indexes, and seed data to facilitate plugin functionality.
@@ -55,16 +64,19 @@ Your response should be a meticulously refactored and highly verbose prompt that
     - **Namespace:**
         - **Purpose:** Organize the plugin's PHP classes under a specific namespace (e.g., `DPM` for Dynamic Playlist Manager).
         - **Benefit:** Prevent naming collisions and enhance autoloading capabilities, ensuring that the plugin's classes are encapsulated and do not interfere with other plugins or WordPress core classes.
+
     - **Prefixing:**
         - **Purpose:** Prefix all option names, functions, and variables with `dpm_`.
         - **Benefit:** Maintain consistency and avoid conflicts with other plugins. If a file name matches a WordPress core file, prefix it with `dpm_` or adopt an industry-standard method to resolve the conflict.
+
     - **Naming Conventions:**
         - **Handles:** Use `kebab-case` for handles, such as script and style handles (`dpm-playlist-script`).
         - **Variables, Functions, and Identifiers:** Use `snake_case` to adhere to WordPress coding standards (`$playlist_items`, `dpm_get_playlists()`).
+
     - **Actions and Filters:**
         - **Purpose:** Leverage both built-in and custom WordPress actions and filters.
         - **Application:** Extend and modify WordPress functionality in a standardized manner, ensuring compatibility and ease of integration. Implement custom hooks (`dpm_before_playlist_display`) to allow other developers to extend plugin functionalities.
-        - **Hooks:** Use the following hooks to extend the plugin's functionality:
+        - **Hooks:**
             - **Actions:**
                 - `dpm_before_playlist_display`: Hook to add content before the playlist display.
                 - `dpm_after_playlist_display`: Hook to add content after the playlist display.
@@ -75,6 +87,7 @@ Your response should be a meticulously refactored and highly verbose prompt that
                 - `dpm_playlist_grouping`: Hook to modify the playlist grouping.
                 - `dpm_playlist_visibility`: Hook to modify the playlist visibility.
                 - `dpm_playlist_pagination`: Hook to modify the playlist pagination.
+
     - **Blocks:**
         - **Purpose:** Implement custom Gutenberg blocks to enhance the user experience.
         - **Application:** Create custom blocks for playlist management, including block patterns for creating playlists efficiently.
@@ -100,6 +113,7 @@ Your response should be a meticulously refactored and highly verbose prompt that
                     - **Performance Optimization:** Allow users to display performance optimization on the playlist grid.
                     - **Responsive Design:** Allow users to display responsive design on the playlist grid.
                     - **Security:** Allow users to display security on the playlist grid.
+
             - **Playlist Management Block:**
                 - **Purpose:** Allow users to manage playlists.
                 - **Features:**
@@ -123,22 +137,28 @@ Your response should be a meticulously refactored and highly verbose prompt that
                     - **Performance Optimization:** Allow users to display performance optimization on the playlist grid.
                     - **Responsive Design:** Allow users to display responsive design on the playlist grid.
                     - **Security:** Allow users to display security on the playlist grid.
+
                 - **Grid Item Composition:**
                     - **Title of the Playlist:** Displayed prominently to identify the playlist.
                     - **Publish Date:** Indicates when the playlist was created or last updated.
                     - **Preview GIF:** Provides a visual snapshot of the playlist's content, enhancing user engagement.
                     - **Play Button:** An interactive element that redirects the user to the Playlist in the appropriate layout, opening in a new tab to maintain the user's current browsing context.
+
                 - **Interactivity:**
                     - **Hover Effects:** Implement hover effects to highlight playlist items and reveal additional options or information.
                     - **Accessibility:** Ensure that all interactive elements are accessible via keyboard navigation and are compatible with screen readers.
+
                 - **Discoverability:**
                     - **Public Access:** Make the Playlist Page accessible to any internet user by default, enhancing content visibility and engagement.
                     - **Visibility Control:** Provide administrators with the ability to disable the Playlist Page through the plugin settings, offering control over content accessibility based on site needs.
+
                 - **Administrator Controls:**
                     - **Settings Page Access:** Restrict access to the plugin settings page exclusively to Administrators and Editors, ensuring that only authorized users can modify featured rows configurations.
+
     - **Security and Permissions:**
-      - **Role-Based Access:** Implement role-based permissions to ensure that only authorized users can perform specific actions, such as adding playlists or modifying settings.
-      - **Data Validation and Sanitization:** Ensure that all user inputs are validated and sanitized to prevent security vulnerabilities like SQL injection or cross-site scripting (XSS) attacks.
+        - **Role-Based Access:** Implement role-based permissions to ensure that only authorized users can perform specific actions, such as adding playlists or modifying settings.
+        - **Data Validation and Sanitization:** Ensure that all user inputs are validated and sanitized to prevent security vulnerabilities like SQL injection or cross-site scripting (XSS) attacks.
+
 5. **Plugin Metadata:**
     - **Definition:** Accurately define the plugin's metadata in the main plugin file, including:
         - **Plugin Name:** Dynamic Playlist Manager
@@ -166,16 +186,16 @@ Your response should be a meticulously refactored and highly verbose prompt that
             - **Functionality:** Allow creators to add media items to playlists either one by one or in bulk. Implement automatic synchronization with the WordPress media library, ensuring that media metadata (title, description, URL) remains consistent.
             - **Details:** Utilize WordPress's media handling APIs to manage media items, ensuring efficient storage and retrieval.
             - **Benefit:** Streamline the process of managing media within playlists and maintain consistency across the site.
-            - **Media:**
+            - **Media Attributes:**
                 - **Title:** The title of the media item.
                 - **Description:** The description of the media item.
                 - **URL:** The URL of the media item.
-                - **Type:** The type of media item (e.g. image, video, audio).
+                - **Type:** The type of media item (e.g., image, video, audio).
                 - **Size:** The size of the media item.
                 - **Duration:** The duration of the media item.
                 - **Resolution:** The resolution of the media item.
                 - **Frame Rate:** The frame rate of the media item.
-            - **Playlist:**
+            - **Playlist Attributes:**
                 - **Title:** The title of the playlist.
                 - **Description:** The description of the playlist.
                 - **Visibility:** The visibility of the playlist.
@@ -192,9 +212,10 @@ Your response should be a meticulously refactored and highly verbose prompt that
                 - **Licensing and Compliance:** The licensing and compliance of the playlist.
                 - **Documentation:** The documentation of the playlist.
                 - **Testing:** The testing of the playlist.
+
     - **Playlist Page:**
         - **Dynamic Grid Display:**
-            - **Functionality:** Render a paginated Playlist Page featuring a dynamic, color-coded grid of Playlist items. Implement responsive design to ensure compatibility across various devices and screen sizes.
+            - **Functionality:** Render a paginated Playlist Page featuring a dynamic, color-coded grid of playlist items. Implement responsive design to ensure compatibility across various devices and screen sizes.
             - **Sorting and Grouping:**
                 - **Options:** Allow users to sort and group playlists by Title (alphabetical), Publish Date (Date-Time), and Author/Creator (grouped by creator's works).
                 - **Implementation:** Provide dropdowns or interactive UI elements for users to select their preferred sorting and grouping criteria.
@@ -219,6 +240,7 @@ Your response should be a meticulously refactored and highly verbose prompt that
                     - **Publish Date:** Indicates when the playlist was created or last updated.
                     - **Preview GIF:** Provides a visual snapshot of the playlist's content, enhancing user engagement.
                     - **Play Button:** An interactive element that redirects the user to the Playlist in the appropriate layout, opening in a new tab to maintain the user's current browsing context.
+
         - **Featured Rows Configuration:**
             - **First Row Settings:**
                 - **Options:**
@@ -226,33 +248,42 @@ Your response should be a meticulously refactored and highly verbose prompt that
                     2. **Top Playlists by Creator/User:** Show the most viewed playlists for a specified creator or WordPress user.
                     3. **Randomized Playlists (Entire Server):** Display a random selection of playlists from the entire site.
                 - **Configuration:** Enable administrators to set the desired option through the plugin settings page.
+
             - **Second Row Settings:**
                 - **Functionality:** If the first row option includes top viewed playlists, the second row will display the next set of top viewed playlists that did not make it into the first row.
                 - **Toggle Option:** Allow administrators to enable or disable the second row feature independently.
+
             - **Access Control:**
                 - **Settings Page Access:** Restrict access to the plugin settings page exclusively to Administrators and Editors, ensuring that only authorized users can modify featured rows configurations.
+
             - **Feature Toggle:**
                 - **Functionality:** Provide options to turn off the first and second row features entirely, allowing administrators to customize the Playlist Page layout based on site requirements.
+
         - **Pagination:**
             - **Functionality:** Implement pagination for the Playlist Page, ensuring that the first page includes the first and second rows (if enabled) followed by sorted and grouped playlist items. Subsequent pages will display additional sorted and grouped playlists.
             - **User Experience:** Ensure smooth navigation between pages with clear indicators of the current page and total number of pages.
+
     - **Grid Item Composition:**
         - **Components:**
             - **Title of the Playlist:** Displayed prominently to identify the playlist.
             - **Publish Date:** Indicates when the playlist was created or last updated.
             - **Preview GIF:** Provides a visual snapshot of the playlist's content, enhancing user engagement.
             - **Play Button:** An interactive element that redirects the user to the Playlist in the appropriate layout, opening in a new tab to maintain the user's current browsing context.
+
         - **Interactivity:**
             - **Hover Effects:** Implement hover effects to highlight playlist items and reveal additional options or information.
             - **Accessibility:** Ensure that all interactive elements are accessible via keyboard navigation and are compatible with screen readers.
+
     - **Discoverability:**
         - **Public Access:** Make the Playlist Page accessible to any internet user by default, enhancing content visibility and engagement.
         - **Visibility Control:** Provide administrators with the ability to disable the Playlist Page through the plugin settings, offering control over content accessibility based on site needs.
+
     - **Administrator Controls:**
         - **Settings Page:**
             - **Access Restrictions:** Ensure that only Administrators and Editors can access and modify plugin settings.
             - **Configuration Options:** Include settings for featured rows, sorting and grouping criteria, color schemes, and visibility toggles.
             - **User Interface:** Design an intuitive and user-friendly settings interface, incorporating form elements, descriptions, and tooltips to guide administrators through configuration.
+
     - **Security and Permissions:**
         - **Role-Based Access:** Implement role-based permissions to ensure that only authorized users can perform specific actions, such as adding playlists or modifying settings.
         - **Data Validation and Sanitization:** Ensure that all user inputs are validated and sanitized to prevent security vulnerabilities like SQL injection or cross-site scripting (XSS) attacks.
@@ -262,10 +293,12 @@ Your response should be a meticulously refactored and highly verbose prompt that
         - **Admin Dashboard Integration:** Incorporate playlist management tools into the WordPress admin dashboard, providing a centralized location for creating, editing, and managing playlists.
         - **CRUD Operations:** Enable users to Create, Read, Update, and Delete playlists with ease, utilizing familiar WordPress interface patterns to enhance usability.
         - **Bulk Operations:** Allow users to add multiple playlists simultaneously, streamlining the content management process.
+
     - **Playlist Page Display:**
         - **Responsive Grid Layout:** Design a grid layout that adapts to various screen sizes and devices, ensuring a consistent and user-friendly experience across desktops, TVs, tablets, and mobile devices.
         - **Dynamic Content Loading:** Implement AJAX-based content loading to enhance performance and reduce page load times, especially for large playlists.
         - **Interactive Elements:** Incorporate interactive elements such as sorting and grouping controls, search functionality, and pagination controls to enhance user engagement and navigation.
+
     - **Customization Options:**
         - **Color Schemes:** Provide options for administrators to define and customize color schemes for the grid, enhancing visual appeal and aligning with site aesthetics.
         - **Sorting and Grouping Controls:** Design intuitive controls for users to sort and group playlists by various criteria, enhancing content discoverability and user experience.
@@ -276,9 +309,11 @@ Your response should be a meticulously refactored and highly verbose prompt that
         - **Playlist Data Retrieval:** Implement efficient data retrieval mechanisms to fetch and display playlists based on sorting, grouping, and pagination criteria.
         - **Caching Mechanisms:** Utilize caching strategies to store frequently accessed data, reducing database queries and enhancing performance.
         - **Data Validation:** Ensure that all user inputs are validated and sanitized to prevent security vulnerabilities like SQL injection or cross-site scripting (XSS) attacks.
+
     - **Media Synchronization:**
         - **Automatic Media Library Integration:** Ensure that media items added to playlists are automatically synchronized with the WordPress media library, maintaining consistency across the site.
         - **Metadata Consistency:** Implement synchronization of media metadata (title, description, URL) between playlists and the media library to ensure uniformity.
+
     - **Error Handling:**
         - **Robust Error Management:** Implement comprehensive error handling to manage scenarios such as failed media loads, database connection issues, or invalid user inputs, ensuring a seamless user experience.
         - **User Notifications:** Provide clear and informative notifications to users in case of errors, guiding them to resolve issues effectively.
@@ -287,9 +322,11 @@ Your response should be a meticulously refactored and highly verbose prompt that
     - **WordPress REST API:**
         - **Endpoint Development:** Develop custom REST API endpoints to facilitate interactions with playlists, enabling external applications or services to integrate with the plugin.
         - **Security Measures:** Implement authentication and authorization mechanisms to secure API endpoints, ensuring that only authorized requests can manipulate playlist data.
+
     - **Third-Party Integrations:**
         - **Social Media APIs:** Integrate with social media platforms to enable sharing of playlists, enhancing content visibility and user engagement.
         - **Analytics Integration:** Incorporate analytics tools to track playlist performance, user interactions, and other relevant metrics, providing valuable insights to content creators.
+
     - **Embeddable Components:**
         - **Shortcode Implementation:** Develop shortcodes to allow users to embed playlists within posts or pages, providing flexibility in content placement.
         - **Iframe and JavaScript Embeds:** Offer iframe and JavaScript embedding options for displaying playlists on external sites, ensuring compatibility and ease of integration across different platforms.
@@ -303,40 +340,51 @@ Your response should be a meticulously refactored and highly verbose prompt that
     - **Data Validation and Sanitization:**
         - **Input Handling:** Rigorously validate and sanitize all user inputs, including form submissions and URL parameters, to prevent security vulnerabilities.
         - **Output Escaping:** Escape all outputs to mitigate the risk of cross-site scripting (XSS) and other injection attacks, ensuring that content is safely rendered.
+
     - **Access Controls:**
         - **Role-Based Permissions:** Implement strict role-based access controls to restrict sensitive actions and data access to authorized users only.
         - **Capability Checks:** Perform capability checks before executing actions that modify data or settings, ensuring that only users with appropriate permissions can perform such actions.
+
     - **Secure File Handling:**
         - **Media Security:** Ensure that media files are securely handled, stored, and served, preventing unauthorized access or file inclusion vulnerabilities.
         - **File Upload Validation:** Validate and sanitize all uploaded files to prevent the upload of malicious content, enforcing strict file type and size restrictions.
+
     - **Credential Storage:**
         - **Secure Storage Practices:** Store sensitive credentials, such as API keys and database passwords, securely using environment variables or secure storage mechanisms, avoiding exposure in the codebase or client-side scripts.
 
 12. **Licensing and Compliance:**
     - **GPL v2 or Later:**
         - **License Adherence:** Ensure that all code complies with the GPL v2 or later license, maintaining consistency with WordPress's licensing and ensuring legal compatibility.
+
     - **Third-Party Libraries:**
         - **License Compatibility:** Verify that any third-party libraries used (e.g., for GIF generation, drag-and-drop functionality, or analytics integration) are compatible with GPL licensing, avoiding legal conflicts and ensuring seamless integration.
+
     - **Privacy Regulations Compliance:**
         - **Legal Compliance:** Ensure compliance with privacy laws like GDPR and CCPA by providing mechanisms for user consent, data management, and secure handling of personal information, protecting user privacy and adhering to legal standards.
 
 13. **Documentation:**
     - **Instructive Comments:**
         - **Code Clarity:** Include detailed comments within the code to explain functionality and facilitate future development, making the codebase accessible and understandable to other developers.
+
     - **User Guide:**
         - **Admin Area Help:** Create a user guide within the plugin's admin area to help users understand how to use all features, including playlist creation, sorting and grouping options, color customization, and visibility settings.
+
     - **Developer Documentation:**
         - **Plugin API Documentation:** Provide comprehensive documentation for the Plugin API to assist developers in extending or integrating with the plugin, promoting community contributions and enhancing plugin functionality through third-party integrations.
 
 14. **Testing:**
     - **Unit Tests:**
         - **Function Reliability:** Write unit tests for critical functions to ensure they perform as expected, maintaining code quality and reliability through automated testing processes.
+
     - **Integration Tests:**
         - **Component Interactions:** Develop integration tests to verify that different components of the plugin interact correctly, ensuring cohesive functionality across the plugin's architecture.
+
     - **Compatibility Tests:**
         - **Version Support:** Ensure compatibility with the latest versions of WordPress, PHP, Node.js, and MySQL, as well as backward compatibility where feasible, to accommodate a wide range of user environments.
+
     - **Docker Environment Testing:**
         - **Consistent Development:** Use the provided Docker configuration to create a consistent development and testing environment, eliminating discrepancies between development and production setups and ensuring reliable testing outcomes.
+
     - **Feature-Specific Testing:**
         - **Playlist Management:** Test the creation, editing, and deletion of playlists to ensure CRUD operations function correctly.
         - **Sorting and Grouping:** Verify that sorting and grouping functionalities work as intended across various criteria.
