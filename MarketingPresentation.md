@@ -1,4 +1,3 @@
-```markdown
 # Dynamic Playlist Manager
 ### Revolutionizing Media Playlists for WordPress
 **Presented by:** Kyle Rode, Founder and CMO  
@@ -214,4 +213,3 @@ Follow us on [LinkedIn](https://linkedin.com/company/yourcompany) | [Twitter](ht
 - **Data-Driven:** Support your points with relevant data, statistics, and research to add credibility.
 - **Engagement:** Incorporate interactive elements, such as polls or questions, to keep the audience involved.
 - **Rehearsal:** Practice delivering the presentation to ensure smooth flow and timing.
-```
