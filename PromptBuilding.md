@@ -64,7 +64,81 @@ Your response should be a meticulously refactored and highly verbose prompt that
     - **Actions and Filters:**
         - **Purpose:** Leverage both built-in and custom WordPress actions and filters.
         - **Application:** Extend and modify WordPress functionality in a standardized manner, ensuring compatibility and ease of integration. Implement custom hooks (`dpm_before_playlist_display`) to allow other developers to extend plugin functionalities.
-
+        - **Hooks:** Use the following hooks to extend the plugin's functionality:
+            - **Actions:**
+                - `dpm_before_playlist_display`: Hook to add content before the playlist display.
+                - `dpm_after_playlist_display`: Hook to add content after the playlist display.
+            - **Filters:**
+                - `dpm_playlist_items`: Hook to modify the playlist items before they are displayed.
+                - `dpm_playlist_colors`: Hook to modify the playlist colors.
+                - `dpm_playlist_sorting`: Hook to modify the playlist sorting.
+                - `dpm_playlist_grouping`: Hook to modify the playlist grouping.
+                - `dpm_playlist_visibility`: Hook to modify the playlist visibility.
+                - `dpm_playlist_pagination`: Hook to modify the playlist pagination.
+    - **Blocks:**
+        - **Purpose:** Implement custom Gutenberg blocks to enhance the user experience.
+        - **Application:** Create custom blocks for playlist management, including block patterns for creating playlists efficiently.
+        - **Blocks:**
+            - **Playlist Grid Block:**
+                - **Purpose:** Display a grid of playlist items.
+                - **Features:**
+                    - **Pagination:** Implement pagination for the playlist grid.
+                    - **Sorting:** Allow users to sort the playlist grid by various criteria.
+                    - **Grouping:** Allow users to group the playlist grid by various criteria.
+                    - **Color Coding:** Allow users to color code the playlist grid.
+                    - **Visibility:** Allow users to hide the playlist grid.
+                    - **Featured Rows:** Allow users to display featured rows on the playlist grid.
+                    - **Second Row:** Allow users to display a second row on the playlist grid.
+                    - **Grid Item Composition:** Allow users to display a grid item composition on the playlist grid.
+                    - **Interactivity:** Allow users to display interactivity on the playlist grid.
+                    - **Discoverability:** Allow users to display discoverability on the playlist grid.
+                    - **Administrator Controls:** Allow users to display administrator controls on the playlist grid.
+                    - **Security and Permissions:** Allow users to display security and permissions on the playlist grid.
+                    - **Licensing and Compliance:** Allow users to display licensing and compliance on the playlist grid.
+                    - **Documentation:** Allow users to display documentation on the playlist grid.
+                    - **Testing:** Allow users to display testing on the playlist grid.
+                    - **Performance Optimization:** Allow users to display performance optimization on the playlist grid.
+                    - **Responsive Design:** Allow users to display responsive design on the playlist grid.
+                    - **Security:** Allow users to display security on the playlist grid.
+            - **Playlist Management Block:**
+                - **Purpose:** Allow users to manage playlists.
+                - **Features:**
+                    - **Playlist Creation:** Allow users to create playlists.
+                    - **Playlist Editing:** Allow users to edit playlists.
+                    - **Playlist Deletion:** Allow users to delete playlists.
+                    - **Playlist Sorting:** Allow users to sort playlists.
+                    - **Playlist Grouping:** Allow users to group playlists.
+                    - **Playlist Color Coding:** Allow users to color code playlists.
+                    - **Playlist Visibility:** Allow users to hide playlists.
+                    - **Featured Rows:** Allow users to display featured rows on the playlist grid.
+                    - **Second Row:** Allow users to display a second row on the playlist grid.
+                    - **Grid Item Composition:** Allow users to display a grid item composition on the playlist grid.
+                    - **Interactivity:** Allow users to display interactivity on the playlist grid.
+                    - **Discoverability:** Allow users to display discoverability on the playlist grid.
+                    - **Administrator Controls:** Allow users to display administrator controls on the playlist grid.
+                    - **Security and Permissions:** Allow users to display security and permissions on the playlist grid.
+                    - **Licensing and Compliance:** Allow users to display licensing and compliance on the playlist grid.
+                    - **Documentation:** Allow users to display documentation on the playlist grid.
+                    - **Testing:** Allow users to display testing on the playlist grid.
+                    - **Performance Optimization:** Allow users to display performance optimization on the playlist grid.
+                    - **Responsive Design:** Allow users to display responsive design on the playlist grid.
+                    - **Security:** Allow users to display security on the playlist grid.
+                - **Grid Item Composition:**
+                    - **Title of the Playlist:** Displayed prominently to identify the playlist.
+                    - **Publish Date:** Indicates when the playlist was created or last updated.
+                    - **Preview GIF:** Provides a visual snapshot of the playlist's content, enhancing user engagement.
+                    - **Play Button:** An interactive element that redirects the user to the Playlist in the appropriate layout, opening in a new tab to maintain the user's current browsing context.
+                - **Interactivity:**
+                    - **Hover Effects:** Implement hover effects to highlight playlist items and reveal additional options or information.
+                    - **Accessibility:** Ensure that all interactive elements are accessible via keyboard navigation and are compatible with screen readers.
+                - **Discoverability:**
+                    - **Public Access:** Make the Playlist Page accessible to any internet user by default, enhancing content visibility and engagement.
+                    - **Visibility Control:** Provide administrators with the ability to disable the Playlist Page through the plugin settings, offering control over content accessibility based on site needs.
+                - **Administrator Controls:**
+                    - **Settings Page Access:** Restrict access to the plugin settings page exclusively to Administrators and Editors, ensuring that only authorized users can modify featured rows configurations.
+    - **Security and Permissions:**
+      - **Role-Based Access:** Implement role-based permissions to ensure that only authorized users can perform specific actions, such as adding playlists or modifying settings.
+      - **Data Validation and Sanitization:** Ensure that all user inputs are validated and sanitized to prevent security vulnerabilities like SQL injection or cross-site scripting (XSS) attacks.
 5. **Plugin Metadata:**
     - **Definition:** Accurately define the plugin's metadata in the main plugin file, including:
         - **Plugin Name:** Dynamic Playlist Manager
@@ -92,6 +166,32 @@ Your response should be a meticulously refactored and highly verbose prompt that
             - **Functionality:** Allow creators to add media items to playlists either one by one or in bulk. Implement automatic synchronization with the WordPress media library, ensuring that media metadata (title, description, URL) remains consistent.
             - **Details:** Utilize WordPress's media handling APIs to manage media items, ensuring efficient storage and retrieval.
             - **Benefit:** Streamline the process of managing media within playlists and maintain consistency across the site.
+            - **Media:**
+                - **Title:** The title of the media item.
+                - **Description:** The description of the media item.
+                - **URL:** The URL of the media item.
+                - **Type:** The type of media item (e.g. image, video, audio).
+                - **Size:** The size of the media item.
+                - **Duration:** The duration of the media item.
+                - **Resolution:** The resolution of the media item.
+                - **Frame Rate:** The frame rate of the media item.
+            - **Playlist:**
+                - **Title:** The title of the playlist.
+                - **Description:** The description of the playlist.
+                - **Visibility:** The visibility of the playlist.
+                - **Color:** The color of the playlist.
+                - **Sorting:** The sorting of the playlist.
+                - **Grouping:** The grouping of the playlist.
+                - **Featured Rows:** The featured rows of the playlist.
+                - **Second Row:** The second row of the playlist.
+                - **Grid Item Composition:** The grid item composition of the playlist.
+                - **Interactivity:** The interactivity of the playlist.
+                - **Discoverability:** The discoverability of the playlist.
+                - **Administrator Controls:** The administrator controls of the playlist.
+                - **Security and Permissions:** The security and permissions of the playlist.
+                - **Licensing and Compliance:** The licensing and compliance of the playlist.
+                - **Documentation:** The documentation of the playlist.
+                - **Testing:** The testing of the playlist.
     - **Playlist Page:**
         - **Dynamic Grid Display:**
             - **Functionality:** Render a paginated Playlist Page featuring a dynamic, color-coded grid of Playlist items. Implement responsive design to ensure compatibility across various devices and screen sizes.
@@ -101,6 +201,24 @@ Your response should be a meticulously refactored and highly verbose prompt that
             - **Color Coding:**
                 - **Functionality:** Assign color codes to playlist items based on specific criteria (e.g., category, popularity) to enhance visual organization and user navigation.
                 - **Customization:** Allow administrators to define color schemes through the plugin settings.
+            - **Visibility:**
+                - **Functionality:** Allow administrators to hide playlists from the Playlist Page through the plugin settings.
+                - **Toggle Option:** Allow administrators to enable or disable the visibility of the Playlist Page entirely.
+                - **Access Control:**
+                    - **Settings Page Access:** Restrict access to the plugin settings page exclusively to Administrators and Editors, ensuring that only authorized users can modify featured rows configurations.
+                - **Feature Toggle:**
+                    - **Functionality:** Provide options to turn off the first and second row features entirely, allowing administrators to customize the Playlist Page layout based on site requirements.
+                    - **Toggle Option:** Allow administrators to enable or disable the visibility of the Playlist Page entirely.
+                    - **Access Control:**
+                        - **Settings Page Access:** Restrict access to the plugin settings page exclusively to Administrators and Editors, ensuring that only authorized users can modify featured rows configurations.
+                - **Pagination:**
+                    - **Functionality:** Implement pagination for the Playlist Page, ensuring that the first page includes the first and second rows (if enabled) followed by sorted and grouped playlist items. Subsequent pages will display additional sorted and grouped playlists.
+                    - **User Experience:** Ensure smooth navigation between pages with clear indicators of the current page and total number of pages.
+                - **Grid Item Composition:**
+                    - **Title of the Playlist:** Displayed prominently to identify the playlist.
+                    - **Publish Date:** Indicates when the playlist was created or last updated.
+                    - **Preview GIF:** Provides a visual snapshot of the playlist's content, enhancing user engagement.
+                    - **Play Button:** An interactive element that redirects the user to the Playlist in the appropriate layout, opening in a new tab to maintain the user's current browsing context.
         - **Featured Rows Configuration:**
             - **First Row Settings:**
                 - **Options:**
@@ -145,7 +263,7 @@ Your response should be a meticulously refactored and highly verbose prompt that
         - **CRUD Operations:** Enable users to Create, Read, Update, and Delete playlists with ease, utilizing familiar WordPress interface patterns to enhance usability.
         - **Bulk Operations:** Allow users to add multiple playlists simultaneously, streamlining the content management process.
     - **Playlist Page Display:**
-        - **Responsive Grid Layout:** Design a grid layout that adapts to various screen sizes and devices, ensuring a consistent and user-friendly experience across desktops, tablets, and mobile devices.
+        - **Responsive Grid Layout:** Design a grid layout that adapts to various screen sizes and devices, ensuring a consistent and user-friendly experience across desktops, TVs, tablets, and mobile devices.
         - **Dynamic Content Loading:** Implement AJAX-based content loading to enhance performance and reduce page load times, especially for large playlists.
         - **Interactive Elements:** Incorporate interactive elements such as sorting and grouping controls, search functionality, and pagination controls to enhance user engagement and navigation.
     - **Customization Options:**
@@ -157,6 +275,7 @@ Your response should be a meticulously refactored and highly verbose prompt that
     - **Data Handling:**
         - **Playlist Data Retrieval:** Implement efficient data retrieval mechanisms to fetch and display playlists based on sorting, grouping, and pagination criteria.
         - **Caching Mechanisms:** Utilize caching strategies to store frequently accessed data, reducing database queries and enhancing performance.
+        - **Data Validation:** Ensure that all user inputs are validated and sanitized to prevent security vulnerabilities like SQL injection or cross-site scripting (XSS) attacks.
     - **Media Synchronization:**
         - **Automatic Media Library Integration:** Ensure that media items added to playlists are automatically synchronized with the WordPress media library, maintaining consistency across the site.
         - **Metadata Consistency:** Implement synchronization of media metadata (title, description, URL) between playlists and the media library to ensure uniformity.
