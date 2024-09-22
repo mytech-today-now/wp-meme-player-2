@@ -1,3 +1,5 @@
+Chat with the AI:   <a href="https://chatgpt.com/share/66f09ada-b554-8013-9ef1-b9e8d64255bf" target="_blank">https://chatgpt.com/share/66f09ada-b554-8013-9ef1-b9e8d64255bf</a>
+
 # Sales Strategy for Dynamic Playlist Manager
 
 ## **1. Executive Summary**
