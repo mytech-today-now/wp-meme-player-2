@@ -1,7 +1,3 @@
-**Refactored and Enhanced Prompt for Developing the "WP Meme Player" WordPress Plugin in Docker**
-
----
-
 **Objective:**
 
 You are assigned the comprehensive task of developing a sophisticated WordPress plugin named **“WP Meme Player”** within a Dockerized environment. This plugin is intended to facilitate the creation and management of custom media playlists by utilizing items from the WordPress media library. To ensure that the plugin is maintainable, scalable, and easily readable, you will incorporate established programming design patterns and rigorously adhere to WordPress coding standards.
@@ -198,7 +194,7 @@ Your response should be a meticulously refactored and highly verbose prompt that
             - **Server-Side Functionality:** Implement functionality to automatically generate GIF previews using Node.js libraries like gifshot or PHP libraries like Imagick, ensuring efficient and reliable GIF creation.
             - **Media Processing:** Process frames or media items and compile them into a GIF file, storing them in the media library for easy access and management.
         - **Analytics Event Tracking:**
-            - **Data Transmission:** Send event data to selected analytics providers, adhering to each provider's API requirements and ensuring accurate tracking of user interactions and playlist performance.
+            - **Data Transmission:** Send event data to selected analytics providers, adhering to each provider's API requirements and ensuring accurate tracking of user interactions (all clicks, all views, durations, comments, etc.) and playlist performance.
 
     - **APIs/Integration:**
         - **Media API Integration:**
@@ -206,15 +202,19 @@ Your response should be a meticulously refactored and highly verbose prompt that
         - **User Authentication:**
             - **WordPress System:** Utilize WordPress's user authentication system to manage user-specific playlists, ensuring privacy, security, and personalized user experiences.
         - **REST API:**
-            - **Expose Data:** Provide RESTful endpoints to allow external applications to interact with playlists, media content, and preview GIFs, facilitating integration, automation, and extended functionality.
+            - **Expose Data:** Provide RESTful endpoints to allow external applications to interact with playlists (add, edit, delete), media content (add, edit, delete), and preview GIFs (add, edit, delete), facilitating integration, automation, and extended functionality.
         - **GIF Generation Libraries:**
             - **Library Utilization:** Use appropriate libraries (gifshot, gifencoder for Node.js or Imagick for PHP) to handle GIF creation, ensuring high-quality and efficient processing that meets user expectations.
+            - **GIF Generation:** Implement functionality to automatically generate GIF previews of playlists, storing them in the media library for easy access and management.
+            - **GIF Display:** Ensure the preview GIF is displayed appropriately when the playlist is embedded, enhancing visual appeal and user engagement across different platforms and devices.
         - **Analytics Provider APIs:**
             - **Secure Integration:** Integrate with the APIs of supported analytics providers to send event data securely and efficiently, maintaining data integrity, privacy, and compliance with provider requirements.
-
-    - **Accessibility and Usability Enhancements:**
-        - **Responsive Design:**
-            - **Cross-Device Compatibility:** Ensure the playlist functionality is responsive and works seamlessly across different devices and screen sizes, providing a consistent and user-friendly experience for all users.
+            - **Accessibility and Usability Enhancements:**
+        - **Alt Text for GIFs:** Allow users to add alt text to preview GIFs for better accessibility and SEO, ensuring that visual content is accessible to all users, including those using screen readers.
+  
+      - **Responsive Design:**
+        - **Pre-load and Cache Frames off-screen:** Implement functionality to pre-load and cache frames off-screen, enhancing performance and user experience by ensuring smooth playback and reducing loading times.
+        - **Cross-Device Compatibility:** Ensure the playlist functionality is responsive and works seamlessly across different devices and screen sizes, providing a consistent and user-friendly experience for all users.
         - **Keyboard Navigability and Screen Reader Support:**
             - **Accessibility Compliance:** Implement features essential for accessibility, ensuring compliance with standards like WCAG to accommodate users with disabilities and enhance overall usability.
         - **Localization and Internationalization:**
