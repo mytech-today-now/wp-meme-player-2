@@ -1,386 +1,430 @@
-As a WordPress Developer who worked at Automattic since its founding, you code with precision, instructive comments, and the fundamentals of WordPress Plugin Development. Your code contains built-in debugging functionality that uses native WordPress debugging. Using an MVC framework such as WP MVC, your code is easy to understand and read.
+**Refactored Prompt for Generating the "WP Meme Player" WordPress Plugin in Docker**
 
-Design a WordPress Plugin Media Viewer called **“WP Meme Player”**.
+---
 
-The repository includes:
+**Objective:**
 
-- **`Dockerfile`**
-- **`.gitignore`**
-- **`.dockerignore`**
-- **`docker-compose.yaml`**
-- **`.env` file**
-- **`wp-config.php`**: The main WordPress configuration file.
-- **`docker-entrypoint.sh`**: A script to handle initialization tasks when the container starts.
-- **Web Server Configuration Files**:
-  - **For Nginx**: `nginx.conf`
-  - **For Apache**: `httpd.conf` or `apache2.conf`
-- **PHP Configuration Files**:
-  - **`php.ini`**: To customize PHP settings within the container.
-- **Database Initialization Scripts**:
-  - **`init.sql`**: SQL scripts to initialize the MySQL database.
-- **`composer.json`** and **`composer.lock`**: Using Composer for PHP dependency management.
-- **`package.json`** and **`package-lock.json`**: Using Node.js and npm for managing frontend assets.
-- **`webpack.config.js`**: Configuration file for Webpack to bundle JavaScript and CSS assets.
-- **MySQL Database**: The Docker instance will use **MySQL** as the database for WordPress.
-- **Node.js and npm**: Included in the Docker instance to manage frontend assets and build processes.
-- **PHP**: The Docker instance includes the necessary PHP version ([Determine the appropriate PHP version]).
-- All other files necessary for this plugin to run in WordPress within a Docker instance.
+You are tasked with generating a comprehensive WordPress plugin named **“WP Meme Player”** within a Docker environment. This plugin is designed to create custom media playlists utilizing WordPress media library items. To ensure the plugin's maintainability, scalability, and readability, you will employ established programming design patterns and adhere to WordPress coding standards. Your response should be a newly refactored, highly verbose prompt that thoroughly explains each component, facilitating clarity and future enhancements.
 
-The Plugin info is as follows:
+---
 
-- **Plugin Name**: WP Meme Player
-- **Plugin URI**: https://mytech.today/plugins/meme-player/
-- **Description**: A plugin to create custom media playlists using WordPress media library items.
-- **Author**: mytech.today
-- **Author URI**: https://mytech.today
-- **Version**: 0.0.1
-- **Requires at least**: [Determine the appropriate version of WordPress]
-- **Requires PHP**: [Determine the appropriate PHP version]
-- **Text Domain**: [Determine the appropriate text domain]
-- **License**: GPL v2 or later
-- **Domain Path**: [Determine the appropriate path]
-- **Network**: [Determine the appropriate network info]
+**Key Requirements:**
 
-The plugin will have its own PHP **Namespace**.
+1. **Programming Design Patterns Integration:**
+   
+   - **Singleton Pattern:** Ensure that certain classes within the plugin have only one instance throughout the application's lifecycle. This is particularly useful for managing shared resources or configurations, such as the main plugin class or configuration settings.
+   
+   - **Model-View-Controller (MVC):** Structure the plugin's codebase by separating concerns:
+     - **Model:** Handles data-related logic, including interactions with the database.
+     - **View:** Manages the presentation layer, rendering the user interface.
+     - **Controller:** Manages the flow of the application, handling user input and interacting with the Model and View.
+   
+   - **Observer Pattern:** Utilize this pattern to allow different parts of the plugin to respond to events or changes, enhancing modularity. In WordPress, this aligns with the hook system, enabling the plugin to listen and respond to specific actions or filters.
+   
+   - **Decorator Pattern:** Facilitate the dynamic addition of responsibilities to objects without modifying their structure. This is useful for extending or customizing existing WordPress classes within the plugin.
+   
+   - **Dependency Injection:** Promote loose coupling by injecting dependencies into classes rather than hardcoding them. This enhances flexibility and testability, allowing for easier swapping of components as needed.
 
-Prefix option names with the plugin name: **`wpmp`**.
+2. **WordPress-Specific Patterns:**
+   
+   - **Block Patterns:** Implement reusable layouts and components to streamline content creation within the plugin.
 
-Use **kebab-case** for handles and **snake_case** for everything else.
+3. **Docker Environment Setup:**
+   
+   - **Dockerfile:** Define the Docker image configuration, specifying the necessary environment for the plugin.
+   
+   - **docker-compose.yaml:** Orchestrate multi-container Docker applications, including WordPress, MySQL, Node.js, and other dependencies.
+   
+   - **.env File:** Manage environment variables securely.
+   
+   - **Web Server Configuration:** Configure Nginx or Apache as the web server within the Docker container.
+   
+   - **PHP and Node.js Configuration:** Ensure the Docker instance includes the appropriate versions of PHP and Node.js, along with necessary extensions and packages.
+   
+   - **Database Initialization:** Use `init.sql` scripts to set up the MySQL database schema required by WordPress and the plugin.
 
-Utilize built-in and custom WordPress **Actions** and **Filters** as necessary to achieve proper coding standards.
+4. **Plugin Structure and Components:**
+   
+   - **Namespace:** Organize the plugin's PHP classes under a specific namespace to prevent naming collisions and enhance autoloading.
+   
+   - **Prefixing:** Prefix all option names with `wpmp` to maintain consistency and avoid conflicts with other plugins.
+   
+   - **Naming Conventions:** Use **kebab-case** for handles and **snake_case** for variables, functions, and other identifiers to adhere to WordPress coding standards.
+   
+   - **Actions and Filters:** Leverage both built-in and custom WordPress actions and filters to extend and modify WordPress functionality in a standardized manner.
 
-**Using WordPress APIs**:
+5. **Plugin Metadata:**
+   
+   Define the plugin's metadata accurately, including:
+   
+   - **Plugin Name:** WP Meme Player
+   - **Plugin URI:** https://mytech.today/plugins/meme-player/
+   - **Description:** A plugin to create custom media playlists using WordPress media library items.
+   - **Author:** mytech.today
+   - **Author URI:** https://mytech.today
+   - **Version:** 0.0.1
+   - **Requires at least:** [Determine the appropriate version of WordPress]
+   - **Requires PHP:** [Determine the appropriate PHP version]
+   - **Text Domain:** [Determine the appropriate text domain]
+   - **License:** GPL v2 or later
+   - **Domain Path:** [Determine the appropriate path]
+   - **Network:** [Determine the appropriate network info]
 
-- **Options API**: Store and retrieve plugin settings.
-- **Widgets API**: Create custom widgets for sidebars and widget areas.
-- **Shortcode API**: Define shortcodes to embed custom content within posts and pages.
-- **HTTP API**: Make external HTTP requests safely.
-- **Settings API**: Build setting pages and forms within the WordPress admin area.
-- **REST API**: Expose plugin data through RESTful endpoints.
-- **Media API**: Handle media uploads and manipulation.
-- **Custom Post Types API**: Register custom post types for playlists.
+6. **Core Functionalities:**
 
-Create a **Plugin API** that allows for all plugin functionality at an API level.
+   Develop the following core components, ensuring each adheres to the integrated design patterns, using WordPress features:
 
-The plugin allows the user to **CRUD** (Create, Read, Update, Delete) **Playlists**, which consist of media, audio, HTML, forms, or JavaScript frames. Each frame is one element of HTML.
+   - **Database Model:**
+     - Register a custom post type `playlist` to manage playlists.
+     - Utilize custom post metadata for additional playlist information, such as default frame timing and analytics configurations.
+     - Associate media items with playlists using custom taxonomies or post meta, maintaining the order of items.
+     - Store each frame's content, timing settings, and metadata, linking them to their respective playlists.
+     - Manage user-specific analytics settings through user meta.
+     - Automatically generate and store preview GIFs associated with each playlist.
 
-Each **Playlist** is a series of frames that play in sequence. The playlist items consist of WordPress Media Items or URLs to other internet media. Each playlist item can include media, video, audio, HTML, forms, or JavaScript.
-
-Users should be able to create playlists of media and HTML content that can be viewed in an `<iframe>`, via JavaScript, or via Shortcode.
-
-**New Features**:
-
-- **Technology Stack**:
-  - **MySQL Database**: Use MySQL as the database for WordPress within the Docker instance.
-  - **Node.js and npm**: Include Node.js and npm in the Docker instance to manage frontend assets and build processes.
-  - **Webpack**: Use Webpack for bundling JavaScript and CSS assets.
-  - **PHP**: Ensure the Docker instance includes the necessary PHP version ([Determine the appropriate PHP version]).
-
-- **Playlists as Custom Post Types**:
-  - **Custom Post Type Registration**: Treat playlists as a custom post type (`playlist`) to leverage WordPress's built-in functionality for posts.
-  - **Admin UI Integration**: Integrate playlists into the WordPress admin UI, allowing users to manage playlists similarly to how they manage posts or pages.
-  - **Sorting and Filtering**: Provide ways to sort and filter posts by post type so that playlists show up exclusively when needed.
-
-- **Preview GIF Generation**: Implement functionality to automatically generate a preview GIF of the playlist in `.gif` format whenever a playlist (custom post) is saved or published. This preview GIF will represent the playlist in WordPress and can be used as a thumbnail or preview image and featured image.  This .gif will be saved into the media library and assigned to the Playlist (custom-post).
-
-- **Frame Timing Controls**:
-  - **Default Image Timer**: Allow the creator to set a default time duration that determines how long each image frame is displayed during playback.
-  - **Individual Frame Timing**: Enable each frame to have its own timing settings that can override the default playback time length.
-    - **Hold Until Clicked**: Option for a frame to remain displayed until the user manually advances to the next frame.
-    - **Loop Until Advanced**: Option for a frame to loop continuously until the next frame is manually advanced.
-    - **Prevent Skip**: Only Creators during editing are able to skip through these frames, otherwise the user must wait and watch this frame.
-
-
-- **Drag-and-Drop Playlist Editing**:
-  - **Drag-and-Drop File Upload**: When creating a new playlist, users should have the ability to drag and drop files into a designated area, which adds each item to the new playlist in the order they were added.
-  - **Playlist Editor Page**: Provide a playlist editor page that uses drag-and-drop features, allowing creators to manage and rearrange the playlist items as necessary.  The items in the playlist can be scaled larger or smaller via a slidebar that allows more items in the view window if the items are small, including the Playlist item number, preview, title, filename, hyperlink to filepath, 
-  - **Reordering Items**: Allow creators to drag and drop playlist items to rearrange their order.
-  - **Bulk File Addition**: Maintain file controls such as system dialogs to add multiple files at once to the playlist.
-  - **Editing Controls**: Provide buttons and controls for changing the order of the playlist, deleting items, and adjusting settings for individual frames.
-  - **Item Deletion**: Allow creators to delete items from the playlist easily.
-
-- **Analytics Integration**:
-  - **Per-User and Per-Playlist Analytics Configuration**:
-    - Allow creators to add analytics tracking codes at the user level in their WordPress User profile page.
-    - Enable overriding the user-level analytics settings with playlist-level analytics tracking codes for individual playlists.
-  - **Supported Analytics Providers**:
-    - **Google Analytics** (including Google Analytics 4 Event data)
-    - **Bing Analytics**
-    - **Adobe Analytics**
-    - **Mixpanel**
-    - **Kissmetrics**
-    - **Hotjar**
-    - **Matomo** (formerly Piwik)
-    - **Open Web Analytics**
-    - **Woopra**
-    - **HubSpot**
-    - **Chartbeat**
-    - **SimilarWeb**
-    - **Ahrefs**
-  - **Analytics Settings Page**:
-    - Provide an Analytics settings page in the plugin where creators can add their credentials or tracking codes for the supported analytics providers.
-  - **Playlist-Level Analytics Configuration**:
-    - On each playlist, allow creators to select multiple analytics providers from a drop-down menu to enable tracking.
-  - **Data Tracking**:
-    - Implement event tracking to send data to the selected analytics providers, including:
-      - Time spent on the entire playlist.
-      - Time spent on each frame.
-      - Which frames were viewed and for how long.
-      - User interactions (e.g., clicks, pauses, skips).
-    - Follow best practices as suggested by SEO experts for useful event tracking.
-  - **Privacy Compliance**:
-    - Ensure compliance with privacy regulations (e.g., GDPR, CCPA) by providing options for user consent and data anonymization.
-    - Allow end-users to opt out of tracking.
-
-- **Enhanced Playlist Editor Layout**:
-  - **Vertical Carousel Layout**:
-    - Design the playlist editor with a vertical carousel that lists all frames in the playlist.
-    - Each frame in the carousel is represented by an icon based on its type:
-      - **Image**: Display the actual image thumbnail.
-      - **Audio**: Display an audio icon.
-      - **Video**: Display an MP4 preview frame.
-      - **HTML**: Display an HTML icon.
-      - **PDF**: Display an PDF icon.
-      - **Form**: Display a form icon.
-      - **JavaScript**: Display a JavaScript icon.
-  - **Preview Window**:
-    - As each frame is edited, it appears in a Preview window within the Playlist Editor Page.
-    - **Frame Details in Preview Window**:
-      - **Name**: Each frame can be named.
-      - **Meta Data and SEO Content**: Tag each frame with relevant metadata and SEO information.
-      - **Creation Time**: Display the timestamp indicating when the frame was added to the playlist.
-      - **Timer Settings**:
-        - **Default Timer**: Set to the playlist's default timer.
-        - **Custom Timer**: Allow users to adjust the time by milliseconds for precise timing.
-      - **Content Fields**:
-      - **Title**: Up to 60 characters (UTF-8 text only).
-      - **File**: Up to 255 characters (UTF-8 text only).
-        - **Content**: Content of the Frame displayed on an HTML Canvas.
-        - **Short Description**: Up to 160 characters (UTF-8 text only).
-        - **Long Description**: Up to 2400 characters (UTF-8 text only).
-      - **Exit URL**:
-        - Provide a field for an exit URL that, when clicked, opens the new URL in a new tab.
-      - **Comments**:
-        - **Frame Level Comments**: Allow internet comments to be added at the frame level.
-        - **Playlist Level Comments**: Allow internet comments to be added at the playlist level.
-        - **Creator Level Comments**: Allow internet comments to be added at the creator level.
-        - **Control Mechanism**: Handle comments through the standard WordPress comment system.
-
-You will create the following via code:
-
-1. **Database Model**
-
-   - **Playlist Data**:
-     - Register a custom post type `playlist` to store playlists as posts.
-     - Use custom post metadata to store additional playlist information, such as default frame timing settings and playlist-level analytics configurations.
-   - **Media Association**:
-     - Utilize custom taxonomies or post meta to associate media items with playlists, including the order or position of each item within the playlist.
-   - **Frames**:
-     - Store each frame's HTML content, individual timing settings, and associate it with the playlist post and its sequence order.
-     - Include metadata fields for frame name, SEO content, creation time, timer settings, titles, descriptions, exit URLs, and comments.
-   - **User Analytics Settings**:
-     - Store analytics provider credentials and tracking codes in user meta for per-user settings.
-   - **Preview GIF Data**:
-     - Automatically store metadata and file paths for the generated preview GIFs associated with each playlist upon saving or publishing.
-
-2. **User Interface (UI)**
-
-   - **Playlist Management**:
+   - **User Interface (UI):**
      - Integrate playlist management into the WordPress admin area under a custom post type interface.
-     - Include the ability to create, edit, and delete playlists, similar to managing posts or pages.
-     - **Default Timing Settings**: Allow users to set a default image timer for the playlist, specifying how long each frame should display by default.
-     - **Analytics Configuration**:
-       - On the playlist editing page, provide options to select analytics providers and input tracking codes specific to that playlist.
-   - **Media and Content Selection**:
-     - **Drag-and-Drop File Upload**: Implement a drag-and-drop area within the playlist editor where users can add files to the playlist by dragging them into the field.
-     - **Bulk File Addition**: Include system dialog controls to add multiple files at once.
-     - **Playlist Editor with Drag-and-Drop**: Allow users to rearrange the order of playlist items using drag-and-drop functionality within the editor.
-     - **Frame Timing Options**:
-       - Provide options for each frame to set custom timing, hold until clicked, or loop until advanced.
-     - **Editing Controls**:
-       - Provide buttons and controls to change the order of the playlist, delete items, and adjust settings for individual frames.
-   - **Enhanced Playlist Editor Layout**:
-     - **Vertical Carousel**: Display all frames in a vertical carousel with appropriate icons representing each frame type.
-     - **Preview Window**:
-       - As frames are edited, display them in a Preview window.
-       - **Frame Details**:
-         - Allow naming of each frame.
-         - Tag frames with metadata and SEO content.
-         - Display creation time.
-         - Provide timer settings with millisecond precision.
-         - Include fields for title, short description, long description, and exit URL.
-         - Enable internet comments at frame, playlist, and creator levels using standard WordPress comment controls.
-   - **Preview GIF Generation**:
-     - Automatically generate a preview GIF of the playlist whenever it is saved or published.
-     - Ensure that the generated GIF includes all relevant frames or media items in the playlist.
-   - **User Profile Analytics Settings**:
-     - In the WordPress User profile page, add fields for users to input their analytics provider credentials and tracking codes.
-   - **Playlist Viewing**:
-     - Offer a clear and accessible view of the selected playlist, showing all items in a list, along with controls for playing the media, reordering items, and removing items.
-     - Display timing settings for each frame in the playlist editor.
-   - **Sorting and Filtering**:
-     - Implement sorting and filtering options in the admin area to display only playlists or filter by custom post type.
+     - Implement drag-and-drop file upload and playlist editing features.
+     - Design an enhanced playlist editor layout with a vertical carousel and a Preview window.
+     - Provide settings pages for analytics configuration at both user and playlist levels.
+     - Ensure responsive design and accessibility compliance.
 
-3. **Media Player Integration**
+   - **Media Player Integration:**
+     - Develop media player controls (play, pause, stop, next, previous) with additional features like shuffle and repeat.
+     - Respect default and custom timing settings during playback.
+     - Enable embedding of playlists via `<iframe>`, JavaScript, or Shortcode, displaying the preview GIF appropriately.
 
-   - **Play Controls**:
-     - Implement basic controls such as play, pause, stop, next, and previous.
-     - Include shuffle and repeat functions.
-     - **Timing Controls**:
-       - Respect the default and custom timing settings for each frame during playback.
-       - Implement functionality to hold frames until the user clicks to advance, if set.
-       - Implement looping of frames that are set to loop until advanced.
-   - **Track Progression**:
-     - Automatically move to the next item in the playlist based on the timing settings.
-     - Handle cases where media fails to load or play.
-   - **Embedding Options**:
-     - Enable playlists to be embedded and viewed using an `<iframe>`, via JavaScript, or through a Shortcode, providing flexibility in content display.
-   - **Preview GIF Display**:
-     - Display the preview GIF in the playlist overview, as a thumbnail, or wherever appropriate within the UI.
+   - **Backend Logic:**
+     - Implement CRUD operations for playlists and their media items.
+     - Handle sorting, ordering, and content sanitization.
+     - Manage timing logic and preview GIF generation using appropriate libraries.
+     - Integrate analytics event tracking with supported providers.
 
-4. **Backend Logic**
+   - **APIs/Integration:**
+     - Expose plugin data through RESTful endpoints.
+     - Integrate with external media APIs if necessary.
+     - Utilize libraries for GIF generation and analytics provider APIs.
 
-   - **CRUD Operations**:
-     - Leverage WordPress's built-in functions for creating, reading, updating, and deleting custom post types.
-     - Save playlists, load existing ones, add or remove media and content from playlists, and delete entire playlists.
-   - **Sorting and Ordering**:
-     - Implement functionality to change the order of media items and frames within a playlist, saving each change back to the database using post metadata.
-   - **Content Sanitization**:
-     - Ensure that any custom HTML, forms, or JavaScript added by users is properly sanitized to maintain security.
-   - **Timing Logic**:
-     - Implement backend logic to handle the default timing settings for playlists and custom timing settings for individual frames.
-     - Handle logic for frames set to hold until clicked or loop until advanced.
-   - **Preview GIF Generation**:
-     - Implement server-side functionality to automatically generate GIF previews of playlists upon saving or publishing a playlist.
-     - Automatically process frames or media items and compile them into a GIF file using Node.js and appropriate libraries.
-   - **Analytics Event Tracking**:
-     - Implement code to send event data to the selected analytics providers.
-     - Ensure that data is sent according to each provider's API requirements.
+   - **Accessibility and Usability Enhancements:**
+     - Ensure keyboard navigability and screen reader support.
+     - Prepare the plugin for localization and internationalization.
+     - Allow adding alt text to preview GIFs.
 
-5. **APIs/Integration**
+   - **Security:**
+     - Validate and sanitize all inputs to prevent security vulnerabilities.
+     - Implement access controls to protect user data and playlists.
+     - Securely handle file generation and storage.
+     - Encrypt and securely store analytics provider credentials.
 
-   - **Media API Integration**:
-     - If media is streamed or dynamically loaded, integrate with media APIs or external platforms (e.g., Spotify, YouTube) as necessary.
-   - **User Authentication**:
-     - Utilize WordPress's user authentication system to manage user-specific playlists, keeping playlists private and secure.
-   - **REST API**:
-     - Expose plugin data through RESTful endpoints to allow external applications to interact with playlists, media content, and preview GIFs.
-   - **GIF Generation Libraries**:
-     - Utilize appropriate Node.js libraries (e.g., `gifshot`, `gifencoder`) or PHP libraries (e.g., Imagick) to handle GIF creation.
-   - **Analytics Provider APIs**:
-     - Integrate with the APIs of supported analytics providers to send event data securely and efficiently.
+   - **OpenGraph Support:**
+     - Add comprehensive Open Graph meta tags to enhance social media integration.
+     - Ensure content is crawlable and accessible to social media bots.
 
-6. **Accessibility and Usability Enhancements**
+   - **Embedding Playlists:**
+     - Develop Shortcode, `<iframe>`, and JavaScript embedding options.
+     - Ensure preview GIFs are displayed correctly in all embed formats.
 
-   - **Responsive Design**:
-     - Ensure the playlist functionality works across different devices and screen sizes.
-   - **Keyboard Navigability and Screen Reader Support**:
-     - Implement features essential for accessibility compliance.
-   - **Localization and Internationalization**:
-     - Prepare the plugin for translation into other languages.
-   - **Alt Text for GIFs**:
-     - Allow users to add alt text to preview GIFs for better accessibility.
+   - **Documentation:**
+     - Include instructive comments within the codebase.
+     - Create user guides and developer documentation within the plugin's admin area.
 
-7. **Security**
+   - **Testing:**
+     - Write unit tests for critical functions.
+     - Perform compatibility tests across WordPress, PHP, Node.js, and MySQL versions.
+     - Test GIF generation, timing settings, drag-and-drop functionality, and analytics integration extensively.
 
-   - **Data Validation and Sanitization**:
-     - Validate and sanitize all inputs, especially user inputs in forms and custom HTML or JavaScript, to prevent SQL injections, XSS attacks, and other security threats.
-   - **Access Controls**:
-     - Protect user data and playlists, ensuring users can only edit or view their own playlists unless explicitly shared.
-   - **Secure File Handling**:
-     - Ensure that the generation and storage of preview GIFs are handled securely, preventing unauthorized access or file inclusion vulnerabilities.
-   - **Credential Storage**:
-     - Store analytics provider credentials securely, using encryption if necessary.
-     - Do not expose sensitive information in client-side code.
+   - **Licensing and Compliance:**
+     - Adhere to GPL v2 or later licensing.
+     - Ensure all third-party libraries are compatible with GPL.
+     - Comply with privacy regulations like GDPR and CCPA.
 
-8. **OpenGraph Support for Playlists in Social Media**
+   - **Additional Features:**
+     - Implement an analytics dashboard.
+     - Add social sharing capabilities.
+     - Provide customization options for the media player and preview GIF.
+     - Implement caching mechanisms for performance optimization.
+     - Include advanced playback and SEO optimization features.
 
-   - **Basic Meta Tags**:
-     - Add Open Graph meta tags inside the `<head>` section to define the title, type, image (use the preview GIF), and URL of your content.
-       ```html
-       <meta property="og:title" content="Title of Your Playlist" />
-       <meta property="og:type" content="website" />
-       <meta property="og:url" content="https://www.example.com/playlist-url" />
-       <meta property="og:image" content="https://www.example.com/path-to-preview.gif" />
-       <meta property="og:description" content="Description of your playlist" />
-       <meta property="og:site_name" content="MyTech Today" />
-       ```
-   - **Additional Tags for Specific Content**:
-     ```html
-     <meta property="og:video" content="https://www.example.com/video.mp4" />
-     <meta property="og:locale" content="en_US" />
-     <meta property="og:audio" content="https://www.example.com/audio.mp3" />
-     ```
-   - **Ensure Content is Crawlable**:
-     - Make sure URLs for images, videos, and the page itself are accessible to social media bots.
-     - Use `robots.txt` to allow access to necessary resources.
+---
 
-9. **Embedding Playlists**
+**Detailed Plugin Specification:**
 
-   - **Shortcode Implementation**:
-     - Develop a shortcode that allows users to embed playlists within posts or pages easily.
-     - Include options within the shortcode to control playback settings, such as default timing.
-   - **Iframe Embedding**:
-     - Provide functionality to generate embeddable `<iframe>` code snippets that can be used to display the playlist on external sites.
-   - **JavaScript Embed**:
-     - Offer a JavaScript snippet that can be used to embed the playlist, allowing for dynamic interaction and customization.
-   - **Preview GIF in Embeds**:
-     - Ensure that the preview GIF is displayed appropriately when the playlist is embedded, enhancing visual appeal.
+1. **Database Model:**
 
-10. **Documentation**
+   - **Playlist Data:**
+     - **Custom Post Type Registration:** Create a custom post type named `playlist` to manage playlists similarly to how posts or pages are handled in WordPress.
+     - **Post Metadata:** Store additional information such as default frame timing and playlist-level analytics configurations using custom post meta fields.
+   
+   - **Media Association:**
+     - **Custom Taxonomies/Post Meta:** Associate media items with playlists, maintaining the sequence and order using custom taxonomies or post meta fields.
+   
+   - **Frames:**
+     - **Content and Timing:** Each frame within a playlist should store its HTML content, individual timing settings, and sequence order. Metadata fields should include frame name, SEO content, creation time, timer settings, titles, descriptions, exit URLs, and comments.
+   
+   - **User Analytics Settings:**
+     - **User Meta:** Store analytics provider credentials and tracking codes specific to each user using user meta fields.
+   
+   - **Preview GIF Data:**
+     - **Metadata and File Paths:** Automatically generate and store metadata and file paths for preview GIFs associated with each playlist upon saving or publishing.
 
-    - **Instructive Comments**:
-      - Include detailed comments in your code to explain functionality and facilitate future development.
-    - **User Guide**:
-      - Create a user guide within the plugin's admin area to help users understand how to use all features, including automatic preview GIF generation, setting frame timing options, configuring analytics, using drag-and-drop functionality, and managing frame metadata and SEO content.
-    - **Developer Documentation**:
-      - Provide documentation for the Plugin API to assist developers in extending or integrating with the plugin.
+2. **User Interface (UI):**
 
-11. **Testing**
+   - **Playlist Management:**
+     - **Admin Area Integration:** Incorporate playlist management into the WordPress admin area under the custom post type interface.
+     - **CRUD Operations:** Allow users to create, edit, and delete playlists with functionalities similar to managing posts or pages.
+     - **Default Timing Settings:** Enable users to set a default image timer for the entire playlist.
+     - **Analytics Configuration:** Provide options within the playlist editing page to select analytics providers and input specific tracking codes.
+   
+   - **Media and Content Selection:**
+     - **Drag-and-Drop File Upload:** Implement a drag-and-drop interface within the playlist editor for adding files to the playlist.
+     - **Bulk File Addition:** Allow users to add multiple files simultaneously using system dialog controls.
+     - **Playlist Editor with Drag-and-Drop:** Facilitate the rearrangement of playlist items through drag-and-drop functionality.
+     - **Frame Timing Options:** Provide options for setting custom timing, holding frames until clicked, or looping frames until advanced.
+     - **Editing Controls:** Include buttons for changing the order, deleting items, and adjusting frame settings.
+   
+   - **Enhanced Playlist Editor Layout:**
+     - **Vertical Carousel:** Display all frames in a vertical carousel with icons representing each frame type (e.g., image, audio, video).
+     - **Preview Window:** Show the currently edited frame in a Preview window with detailed metadata and editing options.
+     - **Frame Details:** Allow users to name each frame, tag with metadata and SEO content, display creation time, set precise timer settings, and manage content fields like title, descriptions, and exit URLs.
+     - **Comments Management:** Enable adding and managing comments at frame, playlist, and creator levels using WordPress's standard comment system.
+   
+   - **Preview GIF Generation:**
+     - **Automatic Generation:** Automatically generate a preview GIF of the playlist upon saving or publishing.
+     - **Media Library Integration:** Save the generated GIF into the WordPress media library and associate it with the corresponding playlist.
 
-    - **Unit Tests**:
-      - Write unit tests for critical functions to ensure reliability.
-    - **Compatibility Tests**:
-      - Ensure compatibility with the latest versions of WordPress, PHP, Node.js, and MySQL.
-    - **Docker Environment**:
-      - Use the provided Docker configuration to create a consistent development and testing environment.
-    - **GIF Generation Testing**:
-      - Thoroughly test the automatic preview GIF generation feature to ensure it works reliably with various media types and sizes.
-    - **Timing Settings Testing**:
-      - Test the default and custom frame timing settings extensively to ensure they behave as expected during playback.
-    - **Drag-and-Drop Testing**:
-      - Test the drag-and-drop file upload and playlist editing to ensure they are intuitive and function correctly across different browsers and devices.
-    - **Analytics Integration Testing**:
-      - Test the analytics tracking to ensure event data is correctly sent to the selected analytics providers.
-      - Verify that tracking codes are correctly applied at both user and playlist levels.
-    - **Enhanced Playlist Editor Testing**:
-      - Test the vertical carousel layout to ensure all frame types are correctly represented with appropriate icons.
-      - Verify that the Preview window accurately displays and allows editing of frame metadata, timing, descriptions, and exit URLs.
-      - Ensure comments can be added and managed at frame, playlist, and creator levels through the standard WordPress comment system.
+   - **User Profile Analytics Settings:**
+     - **Analytics Credentials:** Add fields in the WordPress User profile page for users to input their analytics provider credentials and tracking codes.
+   
+   - **Playlist Viewing:**
+     - **Accessible View:** Provide a clear view of the selected playlist, displaying all items with controls for playback, reordering, and removal.
+     - **Timing Settings Display:** Show timing settings for each frame within the playlist editor.
 
-12. **Licensing and Compliance**
+   - **Sorting and Filtering:**
+     - **Admin Area Filters:** Implement sorting and filtering options in the admin area to display only playlists or filter by the custom post type.
 
-    - **GPL v2 or Later**:
-      - Ensure all code complies with the GPL v2 or later license.
-    - **Third-Party Libraries**:
-      - Verify that any third-party libraries used (e.g., for GIF generation, drag-and-drop functionality, or analytics integration) are compatible with GPL licensing.
-    - **Privacy Regulations Compliance**:
-      - Ensure compliance with privacy laws like GDPR and CCPA.
-      - Provide mechanisms for user consent and data management.
+3. **Media Player Integration:**
 
-13. **Additional Features**
+   - **Play Controls:**
+     - **Basic Controls:** Implement play, pause, stop, next, and previous controls.
+     - **Advanced Controls:** Include shuffle and repeat functionalities.
+   
+   - **Timing Controls:**
+     - **Respect Timing Settings:** Ensure the player respects both default and custom timing settings for each frame.
+     - **Hold and Loop Options:** Implement functionality to hold frames until clicked or loop frames until advanced based on settings.
+   
+   - **Track Progression:**
+     - **Automatic Advancement:** Automatically move to the next item based on timing settings.
+     - **Error Handling:** Manage cases where media fails to load or play.
+   
+   - **Embedding Options:**
+     - **Iframe, JavaScript, Shortcode:** Provide multiple embedding options for flexibility in content display.
+   
+   - **Preview GIF Display:**
+     - **Thumbnail Integration:** Display the preview GIF as a thumbnail or within the UI as appropriate.
 
-    - **Analytics Dashboard**:
-      - Provide an analytics dashboard within the plugin to display aggregated data and insights from the connected analytics providers.
-    - **Social Sharing**:
-      - Add functionality to share playlists directly to social media platforms, utilizing the preview GIF in social posts.
-    - **Customization Options**:
-      - Allow users to customize the appearance of the media player and preview GIF, including themes and styles.
-    - **Caching**:
-      - Implement caching mechanisms for the preview GIFs and playlists to improve performance.
-    - **Advanced Playback Options**:
-      - Include options for autoplay, looping the entire playlist, and setting delays between frames.
-    - **SEO Optimization**:
-      - Implement SEO best practices to improve the visibility of playlists in search engines.
+4. **Backend Logic:**
 
-**Note**: Ensure all functionalities are developed following WordPress coding standards and best practices. The plugin should be secure, efficient, and user-friendly.
+   - **CRUD Operations:**
+     - **Utilize WordPress Functions:** Leverage built-in WordPress functions for creating, reading, updating, and deleting custom post types.
+   
+   - **Sorting and Ordering:**
+     - **Maintain Order:** Implement functionality to change the order of media items and frames within a playlist, saving changes using post metadata.
+   
+   - **Content Sanitization:**
+     - **Security Measures:** Ensure all custom HTML, forms, or JavaScript added by users are properly sanitized to maintain security.
+   
+   - **Timing Logic:**
+     - **Default and Custom Timing:** Handle default timing settings for playlists and custom timing settings for individual frames.
+     - **Hold and Loop Logic:** Manage frames set to hold until clicked or loop until advanced.
+   
+   - **Preview GIF Generation:**
+     - **Server-Side Functionality:** Implement functionality to automatically generate GIF previews using Node.js libraries like `gifshot` or PHP libraries like Imagick.
+     - **Media Processing:** Process frames or media items and compile them into a GIF file.
+   
+   - **Analytics Event Tracking:**
+     - **Data Transmission:** Send event data to selected analytics providers, adhering to each provider's API requirements.
+
+5. **APIs/Integration:**
+
+   - **Media API Integration:**
+     - **External Media Platforms:** Integrate with media APIs (e.g., Spotify, YouTube) if media is streamed or dynamically loaded.
+   
+   - **User Authentication:**
+     - **WordPress System:** Utilize WordPress's user authentication system to manage user-specific playlists, ensuring privacy and security.
+   
+   - **REST API:**
+     - **Expose Data:** Provide RESTful endpoints to allow external applications to interact with playlists, media content, and preview GIFs.
+   
+   - **GIF Generation Libraries:**
+     - **Library Utilization:** Use appropriate libraries (`gifshot`, `gifencoder` for Node.js or Imagick for PHP) to handle GIF creation.
+   
+   - **Analytics Provider APIs:**
+     - **Secure Integration:** Integrate with the APIs of supported analytics providers to send event data securely and efficiently.
+
+6. **Accessibility and Usability Enhancements:**
+
+   - **Responsive Design:**
+     - **Cross-Device Compatibility:** Ensure the playlist functionality is responsive and works seamlessly across different devices and screen sizes.
+   
+   - **Keyboard Navigability and Screen Reader Support:**
+     - **Accessibility Compliance:** Implement features essential for accessibility, ensuring compliance with standards like WCAG.
+   
+   - **Localization and Internationalization:**
+     - **Translation Ready:** Prepare the plugin for translation into other languages, enabling a broader user base.
+   
+   - **Alt Text for GIFs:**
+     - **Enhanced Accessibility:** Allow users to add alt text to preview GIFs for better accessibility and SEO.
+
+7. **Security:**
+
+   - **Data Validation and Sanitization:**
+     - **Prevent Vulnerabilities:** Validate and sanitize all inputs, especially user inputs in forms and custom HTML or JavaScript, to prevent SQL injections, XSS attacks, and other security threats.
+   
+   - **Access Controls:**
+     - **Protect Data:** Ensure users can only edit or view their own playlists unless explicitly shared, protecting user data and playlists.
+   
+   - **Secure File Handling:**
+     - **Prevent Unauthorized Access:** Handle the generation and storage of preview GIFs securely, preventing unauthorized access or file inclusion vulnerabilities.
+   
+   - **Credential Storage:**
+     - **Secure Storage:** Store analytics provider credentials securely, using encryption if necessary, and avoid exposing sensitive information in client-side code.
+
+8. **OpenGraph Support for Playlists in Social Media:**
+
+   - **Basic Meta Tags:**
+     - **Enhance Social Sharing:** Add Open Graph meta tags within the `<head>` section to define the title, type, image (use the preview GIF), and URL of the playlist content.
+   
+   - **Additional Tags for Specific Content:**
+     - **Extended Metadata:** Include additional meta tags for video, locale, and audio to provide comprehensive information to social media platforms.
+   
+   - **Ensure Content is Crawlable:**
+     - **SEO Best Practices:** Make sure URLs for images, videos, and the page itself are accessible to social media bots, and configure `robots.txt` appropriately.
+
+9. **Embedding Playlists:**
+
+   - **Shortcode Implementation:**
+     - **Easy Embedding:** Develop a shortcode that allows users to embed playlists within posts or pages, including options to control playback settings.
+   
+   - **Iframe Embedding:**
+     - **External Display:** Provide functionality to generate embeddable `<iframe>` code snippets for displaying playlists on external sites.
+   
+   - **JavaScript Embed:**
+     - **Dynamic Interaction:** Offer a JavaScript snippet for embedding playlists, allowing for dynamic interaction and customization.
+   
+   - **Preview GIF in Embeds:**
+     - **Visual Appeal:** Ensure the preview GIF is displayed appropriately when the playlist is embedded, enhancing visual appeal and user engagement.
+
+10. **Documentation:**
+
+    - **Instructive Comments:**
+      - **Code Clarity:** Include detailed comments within the code to explain functionality and facilitate future development.
+    
+    - **User Guide:**
+      - **Admin Area Help:** Create a user guide within the plugin's admin area to help users understand how to use all features, including automatic preview GIF generation, setting frame timing options, configuring analytics, using drag-and-drop functionality, and managing frame metadata and SEO content.
+    
+    - **Developer Documentation:**
+      - **Plugin API Documentation:** Provide comprehensive documentation for the Plugin API to assist developers in extending or integrating with the plugin.
+
+11. **Testing:**
+
+    - **Unit Tests:**
+      - **Function Reliability:** Write unit tests for critical functions to ensure they perform as expected.
+    
+    - **Compatibility Tests:**
+      - **Version Support:** Ensure compatibility with the latest versions of WordPress, PHP, Node.js, and MySQL.
+    
+    - **Docker Environment:**
+      - **Consistent Development:** Use the provided Docker configuration to create a consistent development and testing environment.
+    
+    - **Feature-Specific Testing:**
+      - **GIF Generation:** Thoroughly test the automatic preview GIF generation feature to ensure reliability with various media types and sizes.
+      - **Timing Settings:** Test default and custom frame timing settings to confirm expected behavior during playback.
+      - **Drag-and-Drop:** Ensure the drag-and-drop file upload and playlist editing are intuitive and function correctly across different browsers and devices.
+      - **Analytics Integration:** Verify that analytics tracking correctly sends event data to selected providers and that tracking codes are properly applied.
+      - **Enhanced Playlist Editor:** Test the vertical carousel layout and Preview window to ensure accurate representation and editing of frame metadata, timing, descriptions, and exit URLs. Confirm that comments can be added and managed at all relevant levels.
+
+12. **Licensing and Compliance:**
+
+    - **GPL v2 or Later:**
+      - **License Adherence:** Ensure all code complies with the GPL v2 or later license.
+    
+    - **Third-Party Libraries:**
+      - **License Compatibility:** Verify that any third-party libraries used (e.g., for GIF generation, drag-and-drop functionality, or analytics integration) are compatible with GPL licensing.
+    
+    - **Privacy Regulations Compliance:**
+      - **Legal Compliance:** Ensure compliance with privacy laws like GDPR and CCPA by providing mechanisms for user consent and data management.
+
+13. **Additional Features:**
+
+    - **Analytics Dashboard:**
+      - **Data Insights:** Provide an analytics dashboard within the plugin to display aggregated data and insights from connected analytics providers.
+    
+    - **Social Sharing:**
+      - **Direct Sharing:** Add functionality to share playlists directly to social media platforms, utilizing the preview GIF in social posts.
+    
+    - **Customization Options:**
+      - **Appearance Customization:** Allow users to customize the appearance of the media player and preview GIF, including themes and styles.
+    
+    - **Caching:**
+      - **Performance Optimization:** Implement caching mechanisms for preview GIFs and playlists to enhance performance.
+    
+    - **SEO Optimization:**
+      - **Search Engine Visibility:** Implement SEO best practices to improve the visibility of playlists in search engines.
+
+---
+
+**Implementation Guidelines:**
+
+1. **Adherence to Design Patterns:**
+   
+   - **Singleton Pattern:** Implement the Singleton pattern for the main plugin class to ensure a single instance manages the plugin's lifecycle and shared resources.
+   
+   - **MVC Architecture:** Structure the plugin using the MVC architecture to separate concerns, making the codebase more organized and maintainable.
+   
+   - **Observer Pattern:** Utilize the Observer pattern to allow different components of the plugin to listen and respond to events, enhancing modularity.
+   
+   - **Decorator Pattern:** Apply the Decorator pattern to extend or modify existing WordPress classes without altering their core functionality.
+   
+   - **Dependency Injection:** Use Dependency Injection to pass dependencies into classes, promoting loose coupling and easier testing.
+
+2. **WordPress Coding Standards:**
+   
+   - **Code Formatting:** Follow WordPress PHP coding standards for indentation, naming conventions, and file organization.
+   
+   - **Security Best Practices:** Implement nonces for form submissions, sanitize user inputs, and escape outputs to ensure security.
+   
+   - **Performance Optimization:** Optimize queries, use caching where appropriate, and minimize the use of heavy libraries to maintain performance.
+
+3. **Docker Configuration:**
+   
+   - **Environment Consistency:** Ensure the Docker environment replicates the production setup as closely as possible to avoid discrepancies.
+   
+   - **Service Definitions:** Define all necessary services (WordPress, MySQL, Node.js) in the `docker-compose.yaml` file.
+   
+   - **Volume Management:** Use Docker volumes to persist data, such as the WordPress content directory and database data.
+   
+   - **Networking:** Configure appropriate networking settings to allow communication between containers.
+
+4. **Documentation and Comments:**
+   
+   - **Inline Comments:** Provide detailed inline comments explaining the purpose and functionality of code blocks.
+   
+   - **External Documentation:** Create comprehensive documentation covering installation, configuration, usage, and development guidelines.
+   
+   - **API Documentation:** Document all API endpoints, functions, and classes to assist developers in extending or integrating with the plugin.
+
+5. **Testing Strategy:**
+   
+   - **Automated Testing:** Implement automated tests using PHPUnit for PHP components and Jest or similar frameworks for JavaScript components.
+   
+   - **Continuous Integration:** Set up CI pipelines to run tests automatically on code commits, ensuring code quality and reliability.
+   
+   - **Manual Testing:** Conduct manual testing for user interface elements, drag-and-drop functionality, and other interactive features to ensure a seamless user experience.
+
+---
+
+**Final Notes:**
+
+Ensure that all functionalities are developed following WordPress coding standards and best practices. The plugin should be secure, efficient, and user-friendly, providing a robust solution for creating and managing custom media playlists within WordPress. Thoroughly document each component and maintain clear code structure to facilitate future enhancements and maintenance.
+
+
