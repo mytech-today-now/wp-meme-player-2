@@ -1,6 +1,5 @@
 Chat with the AI:   <a href="https://chatgpt.com/share/66f07401-4968-8013-b37a-3a7cce82b077" target="_blank">https://chatgpt.com/share/66f07401-4968-8013-b37a-3a7cce82b077</a>
 
-```markdown
 # Refactored Prompt for Generating a WordPress Plugin in Docker
 
 ---
@@ -378,4 +377,4 @@ Your response should be an exceptionally thorough and meticulously refactored pr
 ## **Final Notes**
 
 Ensure that all functionalities are developed following WordPress coding standards and best practices. The plugin should be secure, efficient, and user-friendly, providing a robust solution for creating, managing, and displaying dynamic media playlists within WordPress. Thoroughly document each component and maintain a clear code structure to facilitate future enhancements and maintenance. By adhering to the detailed specifications and guidelines outlined in this prompt, the **“Dynamic Playlist Manager”** plugin will offer a comprehensive, reliable, and highly customizable media playlist solution that integrates seamlessly with the WordPress ecosystem.
-```
+
