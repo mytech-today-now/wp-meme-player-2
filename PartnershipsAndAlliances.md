@@ -1,3 +1,5 @@
+Chat with the AI:   <a href="https://chatgpt.com/share/66f0bbb4-a76c-8013-bc9b-f9159048b5b7" target="_blank">https://chatgpt.com/share/66f0bbb4-a76c-8013-bc9b-f9159048b5b7</a>
+
 # Partnerships and Alliances: Potential Partnerships for Dynamic Playlist Manager
 
 ## **Partnerships**
