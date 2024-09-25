@@ -256,17 +256,29 @@ This prompt is intended to serve as the foundational blueprint for a series of s
 - **CRUD Operations:** Enable Create, Read, Update, and Delete functionalities.
 - **Bulk Operations:** Allow adding multiple playlists simultaneously.
 
-### **7.2 Playlist Page Display**
+### **7.2 Playlists Page Display**
 - **Responsive Grid Layout:** Adapt to various screen sizes and devices.
 - **Dynamic Content Loading:** Use AJAX for enhanced performance.
-- **Interactive Elements:** Include sorting, grouping, search, and pagination controls.
+- **Interactive Elements:** Include sorting, grouping, search, and pagination controls.  Drag-and-drop controls, as well as buttons.
+- **Playback Mode Controls:** Within Playlist Editor page in 'Edit Control'.
+
+### **7.3 Playlist Playback Page Display**
+- **Responsive Grid Layout:** Adapt to various screen sizes and devices.
+- **Dynamic Content Loading:** Use AJAX for enhanced performance.
+- **Interactive Elements:** Control buttons.
 - **Playback Mode Controls:** Provide options for Full Window and Confined Frame modes.
 
-### **7.3 Customization Options**
+### **7.4 Customization Options**
 - **Color Schemes:** Define and customize grid color schemes.
 - **Sorting and Grouping Controls:** Intuitive controls for content organization.
 - **Search Functionality:** Robust search by title, creator, or metadata.
 - **Playback Settings:** Configure playback modes per playlist.
+
+### **7.3 Playlist Playback Page Display**
+- **Responsive Grid Layout:** Adapt to various screen sizes and devices.
+- **Dynamic Content Loading:** Use AJAX for enhanced performance.
+- **Interactive Elements:** Control buttons.
+- **Playback Mode Controls:** Provide options for Full Window and Confined Frame modes.
 
 ---
 
